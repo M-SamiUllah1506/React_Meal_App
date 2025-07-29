@@ -9,7 +9,7 @@ const Header = (props) => {
         <div className={classes["header-content"]}>
           <h1>Food App</h1>
           <HeaderCartButton />
-        </div>
+         </div>
       </header>
 
       <div className={classes["main-image"]}>

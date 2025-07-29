@@ -6,7 +6,7 @@ const Meals=()=>{
     <Fragment>
         <MealSummary/>
         <Available/>
-    </Fragment>
+     </Fragment>
   )
 }
 
