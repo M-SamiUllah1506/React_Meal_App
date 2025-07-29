@@ -1,9 +1,11 @@
 import './App.css';
+import React,{Fragment} from 'react';
+import Header from './Components/UI/Layout/Header';
 function App() {
   return (
-    <div>
-      <h2>hellos</h2>
-    </div>
+    <Fragment>
+      <Header/>
+    </Fragment>
   );
 }
 
