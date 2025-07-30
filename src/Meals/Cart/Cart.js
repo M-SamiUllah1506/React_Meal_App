@@ -1,28 +1,72 @@
-import Modal from '../../Components/UI/Modal';
-import classes from './Cart.module.css';
-import React from 'react';
-const Cart = props => {
-  const cartItem = (
-    <ul className={classes['cart-items']}>
-      {[{id: 'c1', name: 'Sushi ', amount: 2, price: 12.99}].map (item => (
-        <li>{item.name}</li>
+import Modal from "../../Components/UI/Modal";
+import classes from "./Cart.module.css";
+import { useContext, useState } from "react";
+import CartContext from "../../store/CartContext";
+import CartItem from "./CartItem";
+import OrderForm from "./OrderForm";
+
+const Cart = (props) => {
+  const cartCtx = useContext(CartContext);
+  const [isOrdering, setIsOrdering] = useState(false); 
+
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const hasItems = cartCtx.items.length > 0;
+
+  const cartItemRemove = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const cartItemAdd = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const orderHandler = () => {
+    setIsOrdering(true);
+  };
+
+  const cancelOrderHandler = () => {
+    setIsOrdering(false);
+  };
+
+  const cartItems = (
+    <ul className={classes["cart-items"]}>
+      {cartCtx.items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={cartItemRemove.bind(null, item.id)}
+          onAdd={cartItemAdd.bind(null, item)}
+        />
       ))}
     </ul>
   );
+
   return (
-    <Modal>
-      {cartItem}
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>35.62</span>
-      </div>
-      <div className={classes.actions}>
-        <button className={classes['button--alt']}>Close</button>
-        <button className={classes.button}>Order</button>
+    <>
+      <Modal onClose={props.onClose}>
+        {cartItems}
+        <div className={classes.total}>
+          <span>Total Amount</span>
+          <span>{totalAmount}</span>
+        </div>
+        <div className={classes.actions}>
+          <button className={classes["button--alt"]} onClick={props.onClose}>
+            Close
+          </button>
+          {hasItems && (
+            <button className={classes.button} onClick={orderHandler}>
+              Order
+            </button>
+          )}
+        </div>
+      </Modal>
 
-      </div>
-
-    </Modal>
+      {isOrdering && (
+        <OrderForm onClose={cancelOrderHandler} onConfirm={cancelOrderHandler} />
+      )}
+    </>
   );
 };
 

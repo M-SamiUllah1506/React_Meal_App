@@ -8,7 +8,7 @@ const Header = (props) => {
       <header className={classes.header}>
         <div className={classes["header-content"]}>
           <h1>Food App</h1>
-          <HeaderCartButton />
+          <HeaderCartButton onClick={props.onShowCart} />
          </div>
       </header>
 
