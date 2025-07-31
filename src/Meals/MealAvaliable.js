@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./MealAvailiable.module.css";
 import Card from "../Components/UI/Card";
 import MealItem from "./MealItem/MealItem";
-import Brianyi from '../Meals/MealImages/Brianyi.jpg'
 import Chicken from '../Meals/MealImages/chicken-korma.jpg'
 import Fish from '../Meals/MealImages/Fish.jpg'
 import DahiBale from '../Meals/MealImages/DahiBale.jpg'
@@ -15,7 +14,7 @@ const DUMMY_MEALS = [
     name: "Biryani",
     description: "Spicy, flavorful and most loved!",
     price: 22.99,
-    image: Brianyi,
+    image: "http://localhost:3000/static/media/Brianyi.966b890658d72bc272ec.jpg",
   },
   {
     id: "m2",
